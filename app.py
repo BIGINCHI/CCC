@@ -2,6 +2,7 @@ _D='cannot be processed'
 _C='defaultLit'
 _B='About'
 _A='CAD-CLOUD-COMPARE'
+print(1)
 from cProfile import label
 from cgitb import text
 import math
