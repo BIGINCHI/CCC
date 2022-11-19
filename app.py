@@ -52,7 +52,60 @@ class Authentication_license:
 class WindowApp:
         MENU_OPEN=1;MENU_EXPORT=2;MENU_QUIT=3;MENU_SHOW_SETTINGS=11;MENU_ABOUT=21
         def __init__(self):
-                C='Settings';B='File';A='Quit';gui.Application.instance.initialize();self.window=gui.Application.instance.create_window(_A,1400,900);w=self.window;em=w.theme.font_size;material=rendering.MaterialRecord();gui_layout=gui.Vert(0,gui.Margins(0.5*em,0.5*em,0.5*em,0.5*em));gui_layout_right=gui.Vert(0,gui.Margins(0.5*em,0.5*em,0.5*em,0.5*em));button1=gui.Button('Calculate Distance from cloud to 3d');button1.horizontal_padding_em=10;button1.vertical_padding_em=0.5;button1.set_on_clicked(self.calculate_dist_c_2_d);button2=gui.Button('Calculate distance from 3d to cloud');button2.horizontal_padding_em=10;button2.vertical_padding_em=0.5;button2.set_on_clicked(self.calculate_dist_d_2_c);button3=gui.Button('View both together');button3.horizontal_padding_em=10;button3.vertical_padding_em=0.5;button3.set_on_clicked(self.view_both);button_D=gui.Button('PLOT DISTANCES');button_D.horizontal_padding_em=10;button_D.vertical_padding_em=0.5;button_D.set_on_clicked(self.plot);textArea=gui.TextEdit();textArea.set_on_value_changed(self._on_variable);slider_gui=gui.Slider(gui.Slider.INT);slider_gui.set_limits(0,1);fileedit_layout=gui.Vert();fileedit_layout_right=gui.Vert();fileedit_layout.add_child(button1);fileedit_layout.add_child(button2);fileedit_layout.add_child(button3);fileedit_layout.add_child(gui.Label('plot points'));fileedit_layout.add_child(button_D);fileedit_layout.add_child(gui.Label('Enter variable distance before you press any button to process'));fileedit_layout.add_child(gui.Label('Enter variable distance(enter in tenths values)'));fileedit_layout.add_child(textArea);fileedit_layout_right.add_child(slider_gui);gui_layout.add_child(fileedit_layout);gui_layout_right.add_child(fileedit_layout_right);w.add_child(gui_layout);w.add_child(gui_layout_right)
+                C='Settings';B='File';A='Quit';
+                gui.Application.instance.initialize();
+                self.window=gui.Application.instance.create_window(_A,1400,900);
+                w=self.window;em=w.theme.font_size;
+                material=rendering.MaterialRecord();
+                gui_layout=gui.Vert(0,gui.Margins(0.5*em,0.5*em,0.5*em,0.5*em));
+                gui_layout_right=gui.Vert(0,gui.Margins(0.5*em,0.5*em,0.5*em,0.5*em));
+
+                button1=gui.Button('Calculate Distance from cloud to 3d');
+                button1.horizontal_padding_em=10;
+                button1.vertical_padding_em=0.5;
+                button1.set_on_clicked(self.calculate_dist_c_2_d);
+                
+                button2=gui.Button('Calculate distance from 3d to cloud');
+                button2.horizontal_padding_em=10;
+                button2.vertical_padding_em=0.5;
+                button2.set_on_clicked(self.calculate_dist_d_2_c);
+                
+                button3=gui.Button('View both together');
+                button3.horizontal_padding_em=10;
+                button3.vertical_padding_em=0.5;
+                button3.set_on_clicked(self.view_both);
+                
+                button_D=gui.Button('PLOT DISTANCES');
+                button_D.horizontal_padding_em=10;
+                button_D.vertical_padding_em=0.5;
+                button_D.set_on_clicked(self.plot);
+                
+                textArea=gui.TextEdit();
+                textArea.set_on_value_changed(self._on_variable);
+
+                slider_gui=gui.Slider(gui.Slider.INT);
+                slider_gui.set_limits(0,1);
+
+                fileedit_layout=gui.Vert();
+                fileedit_layout_right=gui.Vert();
+                
+                fileedit_layout.add_child(button1);
+                fileedit_layout.add_child(button2);
+                fileedit_layout.add_child(button3);
+                fileedit_layout.add_child(gui.Label('plot points'));
+                fileedit_layout.add_child(button_D);
+                fileedit_layout.add_child(gui.Label('Enter variable distance before you press any button to process'));
+                fileedit_layout.add_child(gui.Label('Enter variable distance(enter in tenths values)'));
+                fileedit_layout.add_child(textArea);
+
+                fileedit_layout_right.add_child(slider_gui);
+
+                gui_layout.add_child(fileedit_layout);
+                gui_layout_right.add_child(fileedit_layout_right);
+                
+                w.add_child(gui_layout);
+                w.add_child(gui_layout_right)
+
                 if gui.Application.instance.menubar is None:
                         if isMacOS:
                                 app_menu=gui.Menu();
@@ -67,7 +120,25 @@ class WindowApp:
                         if isMacOS:menu.add_menu('Example',app_menu);menu.add_menu(B,file_menu);menu.add_menu(C,settings_menu)
                         else:menu.add_menu(B,file_menu);menu.add_menu(C,settings_menu);menu.add_menu('Help',help_menu)
                         gui.Application.instance.menubar=menu
-                w.set_on_menu_item_activated(WindowApp.MENU_OPEN,self._on_menu_open);w.set_on_menu_item_activated(WindowApp.MENU_QUIT,self._on_menu_quit);w.set_on_menu_item_activated(WindowApp.MENU_ABOUT,self._on_menu_about);scene2=gui.SceneWidget();scene2.scene=o3d.visualization.rendering.Open3DScene(w.renderer);scene2.scene.add_geometry('3D',self.read_pcd_3d(),material);print(2);scene2.setup_camera(60,scene2.scene.bounding_box,(0,0,0));scene1=gui.SceneWidget();scene1.scene=o3d.visualization.rendering.Open3DScene(w.renderer);scene1.scene.add_geometry('cloud',self.read_pcd_cloud(),material);scene1.setup_camera(60,scene1.scene.bounding_box,scene1.scene.bounding_box.get_center());self.gui_layout_1=gui.SceneWidget();self.gui_layout_1.scene=o3d.visualization.rendering.Open3DScene(self.window.renderer);self.gui_layout_1.scene.add_geometry('box',self.make_box(),material)   
+                w.set_on_menu_item_activated(WindowApp.MENU_OPEN,self._on_menu_open);
+                w.set_on_menu_item_activated(WindowApp.MENU_QUIT,self._on_menu_quit);
+                w.set_on_menu_item_activated(WindowApp.MENU_ABOUT,self._on_menu_about);
+                
+                scene2=gui.SceneWidget();
+                scene2.scene=o3d.visualization.rendering.Open3DScene(w.renderer);
+                scene2.scene.add_geometry('3D',self.read_pcd_3d(),material);
+                print(2);
+                scene2.setup_camera(60,scene2.scene.bounding_box,(0,0,0));
+                
+                scene1=gui.SceneWidget();
+                scene1.scene=o3d.visualization.rendering.Open3DScene(w.renderer);
+                scene1.scene.add_geometry('cloud',self.read_pcd_cloud(),material);
+                scene1.setup_camera(60,scene1.scene.bounding_box,scene1.scene.bounding_box.get_center());
+
+                self.gui_layout_1=gui.SceneWidget();
+                self.gui_layout_1.scene=o3d.visualization.rendering.Open3DScene(self.window.renderer);
+                self.gui_layout_1.scene.add_geometry('box',self.make_box(),material)   
+                
                 def main_thread():gui.Application.instance.post_to_main_thread(self.window,self.add_sphere)
                 threading.Thread(target=main_thread).start();self.gui_layout_1.scene.set_background([1,1,1,1]);self.gui_layout_1.setup_camera(60,self.gui_layout_1.scene.bounding_box,(0,0,0));material.shader=_C;w.add_child(self.gui_layout_1);w.add_child(scene2);w.add_child(scene1)
                 def on_layout(theme):
@@ -122,7 +193,23 @@ class WindowApp:
                         app.run()
                 except:print('error')
         def _on_variable(self,text):self.textarea=int(text)*0.01;print(self.textarea)
-        def _on_menu_about(self):em=self.window.theme.font_size;dlg=gui.Dialog(_B);dlg_layout=gui.Vert(em,gui.Margins(em,em,em,em));dlg_layout.add_child(gui.Label('VulcanTech3D cloud computing Software'));ok=gui.Button('OK');ok.set_on_clicked(self._on_about_ok);h=gui.Horiz();h.add_stretch();h.add_child(ok);h.add_stretch();dlg_layout.add_child(h);dlg.add_child(dlg_layout);self.window.show_dialog(dlg)
-        def plot(self):df=pd.DataFrame({'distances':self.distance_d});ax1=df.boxplot(return_type='axes');ax2=df.plot(kind='hist',alpha=0.5,bins=1000);ax3=df.plot(kind='line');plt.show(ax2)
-def main():Authentication_license().auth_window();WindowApp()
-if __name__=='__main__':main()
+        def _on_menu_about(self):
+                em=self.window.theme.font_size;
+                dlg=gui.Dialog(_B);
+                dlg_layout=gui.Vert(em,gui.Margins(em,em,em,em));
+                dlg_layout.add_child(gui.Label('VulcanTech3D cloud computing Software'));
+                ok=gui.Button('OK');ok.set_on_clicked(self._on_about_ok);h=gui.Horiz();
+                h.add_stretch();h.add_child(ok);h.add_stretch();dlg_layout.add_child(h);
+                dlg.add_child(dlg_layout);self.window.show_dialog(dlg)
+
+        def plot(self):
+                df=pd.DataFrame({'distances':self.distance_d});
+                ax1=df.boxplot(return_type='axes');
+                ax2=df.plot(kind='hist',alpha=0.5,bins=1000);
+                ax3=df.plot(kind='line');plt.show(ax2)
+def main():
+        Authentication_license().auth_window();
+        WindowApp()
+
+if __name__=='__main__':
+        main()
