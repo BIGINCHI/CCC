@@ -151,10 +151,30 @@ class WindowApp:
                         gui_layout_right.frame=gui.Rect(r.x+r.width/3+r.width/3+1,r.y,r.width/3,r.height)
 
                 w.set_on_layout(on_layout);gui.Application.instance.run()
-        def make_box(self):mat=rendering.MaterialRecord();mat.shader=_C;print(11);self.gui_layout_1.scene.add_geometry('box',self.read_pcd_3d(),mat);print(11-2)
-        def read_pcd_cloud(self):pcd_data=file_name_cloud;cloud=o3d.io.read_point_cloud(pcd_data);cloud.normalize_normals();self.geometry=cloud;return self.geometry
-        def read_pcd_3d(self):pcd_data_3d=file_name_3d;thd=o3d.io.read_point_cloud(pcd_data_3d);thd.normalize_normals();self.geometry3d=thd;return self.geometry3d
-        def add_sphere(self):mat=rendering.MaterialRecord();mat.shader=_C;print(12);self.gui_layout_1.scene.add_geometry('sphere',self.read_pcd_cloud(),mat);print(11)
+        def make_box(self):
+                mat=rendering.MaterialRecord();
+                mat.shader=_C;print(11);
+                self.gui_layout_1.scene.add_geometry('box',self.read_pcd_3d(),mat);
+                print(11-2)
+
+        def read_pcd_cloud(self):
+                pcd_data=file_name_cloud;
+                cloud=o3d.io.read_point_cloud(pcd_data);
+                cloud.normalize_normals();
+                self.geometry=cloud;
+                return self.geometry
+
+        def read_pcd_3d(self):
+                pcd_data_3d=file_name_3d;
+                thd=o3d.io.read_point_cloud(pcd_data_3d);
+                thd.normalize_normals();
+                self.geometry3d=thd;
+                return self.geometry3d
+
+        def add_sphere(self):
+                mat=rendering.MaterialRecord();
+                mat.shader=_C;print(12);
+                self.gui_layout_1.scene.add_geometry('sphere',self.read_pcd_cloud(),mat);print(11)
         
         def calculate_dist_c_2_d(self):
                 pcd_data=file_name_cloud;
