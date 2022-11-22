@@ -192,7 +192,11 @@ class WindowApp:
                         app.add_window(vis);
                         app.run()
                 except:print('error')
-        def _on_variable(self,text):self.textarea=int(text)*0.01;print(self.textarea)
+
+        def _on_variable(self,text):
+                self.textarea=int(text)*0.01;
+                print(self.textarea)
+                
         def _on_menu_about(self):
                 em=self.window.theme.font_size;
                 dlg=gui.Dialog(_B);
