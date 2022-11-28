@@ -12,7 +12,7 @@ int main()
     //char y[]="/home/curtainmonkey/Downloads/open3d_gui/vulcantechs-3d/pipes.ply";
    // Set PYTHONPATH TO working directory
    setenv("PYTHONPATH",".",1);
-
+   std::string output;
    PyObject *pName, *pModule, *pDict, *pFunc, *pValue,*pValue1, *presult, *presult1, *pFunc1, *pResultstr;
     
    std::string x = "/home/curtainmonkey/Downloads/open3d_gui/vulcantechs-3d/pipes.ply";
@@ -70,6 +70,7 @@ int main()
 
        std::string returnedString = PyUnicode_AsUTF8(pResultstr);
        std::cout << returnedString << std::endl;
+       output = returnedString;
        //printf("Result is %c\n",PyUnicode_AsUTF8String(pResultstr));
        
        PyErr_Print();
@@ -81,6 +82,7 @@ int main()
    /////////////////////////////////////////////////////
    //newcode here end
    printf("Result is %ld\n",PyLong_AsLong(presult));
+   printf("%s\n",output.c_str());
    
    Py_DECREF(pValue);
 
@@ -88,7 +90,7 @@ int main()
    Py_DECREF(pModule);
    Py_DECREF(pName);
    Py_DECREF(presult1);
-       Py_DECREF(pResultstr);
+   Py_DECREF(pResultstr);
    //PyRun_SimpleString("exec(open('APP.py').read())");
    // Finish the Python Interpreter
    Py_Finalize();

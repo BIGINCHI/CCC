@@ -4,4 +4,5 @@ def someFunction_cloud(text):
 
 def someFunction_3d(text):
     print(text)
-    return "hello"
+    return "hullgandu"
+
