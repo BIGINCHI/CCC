@@ -13,7 +13,7 @@ int main()
    // Set PYTHONPATH TO working directory
    setenv("PYTHONPATH",".",1);
    std::string output;
-   PyObject *pName, *pModule, *pDict, *pFunc, *pValue,*pValue1, *presult, *presult1, *pFunc1, *pResultstr;
+   PyObject *pName, *pModule, *pDict, *pFunc, *pValue, *pValue1, *pValue2, *presult, *presult1, *presult2,*pFunc1, *pFunc2, *pResultstr, *pResultstr1;
     
    std::string x = "/home/curtainmonkey/Downloads/open3d_gui/vulcantechs-3d/pipes.ply";
    std::string y = "/home/curtainmonkey/Downloads/open3d_gui/vulcantechs-3d/pipes_added_v2.ply";
@@ -40,7 +40,7 @@ int main()
        //pValue=Py_BuildValue("(z)",(char* )"helo");;
        pValue=Py_BuildValue("s",(x.c_str()));
        PyErr_Print();
-       printf("Let's give this a shot!\n");
+       printf("FILE ONE UPLOAD :\n");
        //presult=PyObject_CallObject(pFunc,pValue);
        presult=PyObject_CallFunctionObjArgs(pFunc,pValue,NULL);
        PyErr_Print();
@@ -62,14 +62,14 @@ int main()
        PyErr_Print();
         std:: string pass = "passed value";
 
-       printf("result return\n");
+       printf("FILE 2 UPLOAD :\n");
        
-       presult1=PyObject_CallFunction(pFunc1,"s",pass.c_str());
+       presult1=PyObject_CallFunction(pFunc1,"s",y.c_str());
 
        pResultstr = PyObject_Repr(presult1);
 
        std::string returnedString = PyUnicode_AsUTF8(pResultstr);
-       std::cout << returnedString << std::endl;
+       //std::cout << returnedString << std::endl;
        output = returnedString;
        //printf("Result is %c\n",PyUnicode_AsUTF8String(pResultstr));
        
@@ -79,9 +79,36 @@ int main()
    {
        PyErr_Print();
    }
+
+
+    pFunc2 = PyDict_GetItemString(pDict, (char*)"functionC3");
+
+   if (PyCallable_Check(pFunc))
+   {
+       
+       pValue2=Py_BuildValue("s",(x.c_str()));
+       
+       printf("FUNCTION TEST UPLOAD :\n");
+       
+       presult2=PyObject_CallFunctionObjArgs(pFunc2,pValue2,NULL);
+
+       pResultstr1 = PyObject_Repr(presult2);
+
+       std::string returnedString1 = PyUnicode_AsUTF8(pResultstr1);
+       //std::cout << returnedString1 << std::endl;
+
+              
+   } else 
+   {
+       PyErr_Print();
+   }
+
    /////////////////////////////////////////////////////
    //newcode here end
-   printf("Result is %ld\n",PyLong_AsLong(presult));
+
+
+
+   //printf("Result is %ld\n",PyLong_AsLong(presult));
    printf("%s\n",output.c_str());
    
    Py_DECREF(pValue);
@@ -91,9 +118,9 @@ int main()
    Py_DECREF(pName);
    Py_DECREF(presult1);
    Py_DECREF(pResultstr);
-   //PyRun_SimpleString("exec(open('APP.py').read())");
+   
    // Finish the Python Interpreter
-   Py_Finalize();
+   Py_FinalizeEx();
 
 
     return 0;

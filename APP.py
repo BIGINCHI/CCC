@@ -13,23 +13,22 @@ import subprocess
 from subprocess import Popen, PIPE
 isMacOS=platform.system()=='Darwin'
 
+def someFunction_cloud(text):
+        global file_name_cloud
+        file_name_cloud = text
+        print(1)
 
-file_name_cloud=False
-file_name_3d=False
+def functionC3(text):
+        global file_name_3d
+        file_name_3d = text
+        print(2)
+#file_name_cloud='/home/curtainmonkey/Desktop/VULCANCC/pythonincpp/pipes_added_v2.ply'
+#file_name_3d='/home/curtainmonkey/Desktop/VULCANCC/pythonincpp/pipes.ply'
 
 import open3d as o3d
 import open3d.visualization.gui as gui
 import numpy as np
 
-def someFunction(text):
-    
-    global file_name_cloud
-
-    file_name_cloud=text
-
-    print(file_name_cloud)
-
-    return 0
 
 
         
@@ -264,7 +263,6 @@ class WindowApp:
         
                 
 if __name__ == "__main__":
-    someFunction(text)
     WindowApp()
 
 
