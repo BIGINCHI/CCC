@@ -12,18 +12,12 @@ from matplotlib import pyplot as plt
 import subprocess
 from subprocess import Popen, PIPE
 isMacOS=platform.system()=='Darwin'
+import app
 
-def someFunction_cloud(text):
-        global file_name_cloud
-        file_name_cloud = text
-        print(1)
 
-def functionC3(text):
-        global file_name_3d
-        file_name_3d = text
-        print(2)
-#file_name_cloud='/home/curtainmonkey/Desktop/VULCANCC/pythonincpp/pipes_added_v2.ply'
-#file_name_3d='/home/curtainmonkey/Desktop/VULCANCC/pythonincpp/pipes.ply'
+file_name_cloud=app.cloud
+file_name_3d=app.threed
+
 
 import open3d as o3d
 import open3d.visualization.gui as gui

@@ -110,7 +110,7 @@ int main()
 
    //printf("Result is %ld\n",PyLong_AsLong(presult));
    printf("%s\n",output.c_str());
-   
+   PyRun_SimpleString("exec(open('APP.py').read())\n");
    Py_DECREF(pValue);
 
    // Clean up
