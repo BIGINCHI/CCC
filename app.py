@@ -50,12 +50,7 @@ def functionC3(text):
 
         print(pc_1)
         print(pc_2)
-
-        
-        
-        
    
-       
         gui.Application.instance.run()
           
         pass
