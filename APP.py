@@ -13,6 +13,9 @@ import subprocess
 from subprocess import Popen, PIPE
 isMacOS=platform.system()=='Darwin'
 import app
+from PySide2 import QtWidgets, QtGui,QtCore
+import open3d as o3d
+import sys
 
 
 file_name_cloud=app.cloud
@@ -230,6 +233,7 @@ class WindowApp:
 
         def view_result(self):
                 try:    
+                        app=gui.Application.instance.initialize()
                         vis = o3d.visualization.Visualizer()
                         vis.create_window()
                         print("1) Press 'Y' twice to align geometry with negative direction of y-axis")
@@ -242,6 +246,8 @@ class WindowApp:
                         
                         points=self.pcd_result;
                         o3d.visualization.draw_geometries_with_editing([points])
+
+                        app.run()
                                               
                        
                                                
