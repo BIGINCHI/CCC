@@ -236,6 +236,9 @@ class WindowApp:
                         
                         points=self.pcd_result;
                         o3d.visualization.draw_geometries_with_editing([points])
+                        
+
+                        
                                                 
                 except:
                         print(0)
