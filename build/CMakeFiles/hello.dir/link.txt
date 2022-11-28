@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++11 CMakeFiles/hello.dir/foobar.cpp.o -o hello  /usr/lib/x86_64-linux-gnu/libpython3.10.so 
