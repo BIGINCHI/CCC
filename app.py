@@ -22,7 +22,9 @@ def functionC3(text):
         pcd_data_3d=threed
         pc_1=o3d.io.read_point_cloud(pcd_data);
         pc_2=o3d.io.read_point_cloud(pcd_data_3d);
+        print("cloud model has ")
         print(pc_1)
+        print("3d model after sampling has")
         print(pc_2)    
         pass
 

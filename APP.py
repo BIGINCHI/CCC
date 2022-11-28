@@ -13,9 +13,7 @@ import subprocess
 from subprocess import Popen, PIPE
 isMacOS=platform.system()=='Darwin'
 import app
-from PySide2 import QtWidgets, QtGui,QtCore
-import open3d as o3d
-import sys
+
 
 
 file_name_cloud=app.cloud

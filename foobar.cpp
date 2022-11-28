@@ -83,7 +83,7 @@ int main()
    {
        pValue2=Py_BuildValue("s",(x.c_str()));
        
-       printf("FUNCTION TEST UPLOAD :\n");
+       printf("Function commit paths:\n");
        
        presult2=PyObject_CallFunctionObjArgs(pFunc2,pValue2,NULL);
 
@@ -100,7 +100,8 @@ int main()
    //newcode here end
 
    //printf("Result is %ld\n",PyLong_AsLong(presult));
-   printf("%s\n",output.c_str());
+   //printf("%s\n",output.c_str());
+   
    PyRun_SimpleString("exec(open('APP.py').read())\n");
    Py_DECREF(pValue);
 
