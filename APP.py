@@ -85,7 +85,12 @@ class WindowApp:
                 fileedit_layout.add_child(gui.Label(""))
                 fileedit_layout.add_child(button3);
                 fileedit_layout.add_child(gui.Label(""))
+                fileedit_layout.add_child(gui.Label('after you press save result and check terminal for instructions'));
+                fileedit_layout.add_child(gui.Label(""))
                 fileedit_layout.add_child(button4);
+                fileedit_layout.add_child(gui.Label(""))
+                fileedit_layout.add_child(gui.Label("window will close after you save the result"))
+                fileedit_layout.add_child(gui.Label(""))
                 
                 
                 
@@ -225,7 +230,8 @@ class WindowApp:
 
         def view_result(self):
                 try:    
-                        
+                        vis = o3d.visualization.Visualizer()
+                        vis.create_window()
                         print("1) Press 'Y' twice to align geometry with negative direction of y-axis")
                         print("2) Press 'K' to lock screen and to switch to selection mode")
                         print("3) Drag for rectangle selection,")
@@ -236,10 +242,9 @@ class WindowApp:
                         
                         points=self.pcd_result;
                         o3d.visualization.draw_geometries_with_editing([points])
-                        
-
-                        
-                                                
+                                              
+                       
+                                               
                 except:
                         print(0)
                 pass
